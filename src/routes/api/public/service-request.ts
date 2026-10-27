@@ -1,13 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
-
-const payloadSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().max(30).optional().default(""),
-  service: z.string().trim().min(1, "Choose a service").max(80),
-  message: z.string().trim().min(1, "Please describe what you need").max(2000),
-});
 
 // Public endpoint: the handler verifies and validates everything itself —
 // /api/public/* bypasses site auth, so nothing here may trust the caller.
@@ -22,7 +13,8 @@ export const Route = createFileRoute("/api/public/service-request")({
           return Response.json({ error: "Invalid request." }, { status: 400 });
         }
 
-        const parsed = payloadSchema.safeParse(body);
+        const { quoteSchema, deliverQuote } = await import("@/lib/quote-delivery.server");
+        const parsed = quoteSchema.safeParse(body);
         if (!parsed.success) {
           return Response.json(
             { error: "Please check your details and try again." },
@@ -30,32 +22,29 @@ export const Route = createFileRoute("/api/public/service-request")({
           );
         }
 
-        const { name, email, phone, service, message } = parsed.data;
-
-        const { createClient } = await import("@supabase/supabase-js");
-        const supabase = createClient(
-          process.env["VITE_SUPABASE_URL"]!,
-          process.env["VITE_SUPABASE_PUBLISHABLE_KEY"]!,
-          { auth: { persistSession: false } },
-        );
-
-        const { error } = await supabase.from("service_requests").insert({
-          name,
-          email,
-          phone: phone === "" ? null : phone,
-          service_needed: service,
-          message,
-        });
-
-        if (error) {
-          console.error("service_request insert failed:", error.message);
+        const accessKey = process.env["WEB3FORMS_ACCESS_KEY"];
+        if (!accessKey) {
           return Response.json(
-            { error: "Something went wrong. Please call or email us instead." },
-            { status: 500 },
+            { error: "Quote delivery is temporarily unavailable. Please email herbywoodl@gmail.com." },
+            { status: 503 },
           );
         }
-
-        return Response.json({ success: true });
+        try {
+          const result = await deliverQuote(parsed.data, accessKey);
+          if (!result.accepted) {
+            console.error("Quote email provider rejected submission", { status: result.status });
+            return Response.json(
+              { error: "Your request could not be emailed. Please try again or email herbywoodl@gmail.com." },
+              { status: 502 },
+            );
+          }
+          return Response.json({ success: true });
+        } catch {
+          return Response.json(
+            { error: "Email delivery could not be confirmed. Please email herbywoodl@gmail.com." },
+            { status: 502 },
+          );
+        }
       },
     },
   },

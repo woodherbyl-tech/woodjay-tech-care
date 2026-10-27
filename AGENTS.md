@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Quote delivery uses a validated same-origin handler and a server-only Web3Forms helper; keep provider credentials private and report success only after provider acceptance.
