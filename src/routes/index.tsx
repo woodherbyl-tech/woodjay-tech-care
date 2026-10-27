@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Headset, Network, Database, Code2, Cpu, ShieldCheck, Wrench, Phone, Mail, ArrowRight, Sparkles } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { Headset, Network, Database, Code2, Cpu, ShieldCheck, Wrench, Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/")({
