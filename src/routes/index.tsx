@@ -220,6 +220,7 @@ function Index() {
                 <div className="min-w-0"><div className="text-sm text-muted-foreground">Email</div><div className="truncate text-2xl font-bold">{EMAIL}</div></div>
               </a>
             </div>
+            <ServiceRequestForm />
           </div>
         </div>
       </section>
