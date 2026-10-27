@@ -29,6 +29,116 @@ const services = [
   { icon: Wrench, title: "Computer Repair", text: "Laptops and desktops: virus removal, upgrades, screens and more.", color: "text-c7 bg-c7/15 border-c7/40" },
 ];
 
+const SERVICE_OPTIONS = [
+  "IT Support",
+  "Networking",
+  "Database",
+  "Web Development",
+  "Software Engineering",
+  "Cybersecurity for Business",
+  "Computer Repair",
+  "Something else",
+];
+
+function ServiceRequestForm() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setStatus("sending");
+    setError("");
+    try {
+      const res = await fetch("/api/public/service-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          service: data.get("service"),
+          message: data.get("message"),
+        }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? "Something went wrong. Please call or email us instead.");
+      }
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="mt-10 rounded-2xl border border-c4/40 bg-c4/10 p-8 text-center">
+        <CheckCircle2 className="mx-auto h-10 w-10 text-c4" />
+        <h3 className="mt-3 text-2xl font-bold">Request received!</h3>
+        <p className="mt-2 text-muted-foreground">
+          Thanks for reaching out — we'll get back to you shortly. For anything urgent, call or text {PHONE}.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-4 text-sm font-bold text-c1 underline-offset-4 hover:underline"
+        >
+          Send another request
+        </button>
+      </div>
+    );
+  }
+
+  const fieldClass = "w-full rounded-xl border bg-background/60 px-4 py-2.5 text-sm outline-none transition focus:border-c1 focus:ring-2 focus:ring-c1/30";
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-10 rounded-2xl border bg-card/60 p-6 md:p-8">
+      <h3 className="text-2xl font-bold">Request a <span className="text-gradient">free quote</span></h3>
+      <p className="mt-1 text-sm text-muted-foreground">Tell us what you need help with and we'll get back to you.</p>
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold">Name</span>
+          <input name="name" required maxLength={100} placeholder="Your name" className={fieldClass} />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold">Email</span>
+          <input name="email" type="email" required maxLength={255} placeholder="you@example.com" className={fieldClass} />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold">Phone (optional)</span>
+          <input name="phone" type="tel" maxLength={30} placeholder="Your phone number" className={fieldClass} />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-semibold">Service needed</span>
+          <select name="service" required defaultValue="" className={fieldClass}>
+            <option value="" disabled>Choose a service…</option>
+            {SERVICE_OPTIONS.map((option) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+        <label className="block sm:col-span-2">
+          <span className="mb-1.5 block text-sm font-semibold">How can we help?</span>
+          <textarea name="message" required maxLength={2000} rows={4} placeholder="Describe the technical help you need…" className={fieldClass} />
+        </label>
+      </div>
+      {error && <p className="mt-3 text-sm font-semibold text-c2">{error}</p>}
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 font-bold text-primary-foreground shadow-lg transition hover:scale-105 disabled:opacity-60"
+      >
+        {status === "sending" ? "Sending…" : "Send request"}
+        <Send className="h-4 w-4" />
+      </button>
+    </form>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen overflow-hidden">
