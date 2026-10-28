@@ -32,6 +32,7 @@
   --color-c5: var(--c5);
   --color-c6: var(--c6);
   --color-c7: var(--c7);
+  --color-overlay: var(--overlay);
 }
 
 :root {
@@ -59,6 +60,7 @@
   --c6: oklch(0.7 0.22 30);
   --c7: oklch(0.85 0.17 100);
   --gradient-brand: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
+  --overlay: oklch(0.08 0.02 265 / 80%);
 }
 
 @utility text-gradient {
