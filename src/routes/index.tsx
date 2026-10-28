@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Headset, Network, Database, Code2, Cpu, ShieldCheck, Wrench, Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
+import { Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
 import hero from "@/assets/hero.jpg";
+import { OurServices } from "@/components/our-services";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,16 +20,6 @@ export const Route = createFileRoute("/")({
 
 const PHONE = "321-247-1251";
 const EMAIL = "herbywoodl@gmail.com";
-
-const services = [
-  { icon: Headset, title: "IT Support", text: "Fast, friendly help desk and on-site support to keep your team running.", color: "text-c1 bg-c1/15 border-c1/40" },
-  { icon: Network, title: "Networking", text: "Wi‑Fi, routers, switches and cabling designed for speed and reliability.", color: "text-c2 bg-c2/15 border-c2/40" },
-  { icon: Database, title: "Database", text: "Design, setup, backups and tuning so your data is safe and fast.", color: "text-c3 bg-c3/15 border-c3/40" },
-  { icon: Code2, title: "Web Development", text: "Modern, mobile-friendly websites that win you customers.", color: "text-c4 bg-c4/15 border-c4/40" },
-  { icon: Cpu, title: "Software Engineering", text: "Custom apps and tools built around how your business works.", color: "text-c5 bg-c5/15 border-c5/40" },
-  { icon: ShieldCheck, title: "Cybersecurity for Business", text: "Firewalls, threat protection, audits and staff training.", color: "text-c6 bg-c6/15 border-c6/40" },
-  { icon: Wrench, title: "Computer Repair", text: "Laptops and desktops: virus removal, upgrades, screens and more.", color: "text-c7 bg-c7/15 border-c7/40" },
-];
 
 const SERVICE_OPTIONS = [
   "IT Support",
@@ -178,25 +169,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-6xl px-5 py-24">
-        <h2 className="text-4xl font-extrabold md:text-5xl">What we <span className="text-gradient">do best</span></h2>
-        <p className="mt-3 text-muted-foreground">Professional solutions for homes and businesses.</p>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <div key={s.title} className={`group rounded-2xl border bg-card p-6 transition hover:-translate-y-1 ${s.color.split(" ").pop()}`}>
-              <div className={`inline-flex rounded-xl border p-3 ${s.color}`}>
-                <s.icon className="h-7 w-7" />
-              </div>
-              <h3 className="mt-5 text-xl font-bold">{s.title}</h3>
-              <p className="mt-2 text-muted-foreground">{s.text}</p>
-            </div>
-          ))}
-          <a href="#contact" className="flex flex-col justify-center rounded-2xl bg-gradient-brand p-6 text-primary-foreground transition hover:-translate-y-1">
-            <h3 className="text-2xl font-extrabold">Need something else?</h3>
-            <p className="mt-2 font-semibold">Ask us — we handle it all. →</p>
-          </a>
-        </div>
-      </section>
+      <OurServices />
 
       <section className="border-y bg-muted/40">
         <div className="mx-auto grid max-w-6xl gap-6 px-5 py-14 text-center sm:grid-cols-3">
