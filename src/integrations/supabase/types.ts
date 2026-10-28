@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      client_reviews: {
+        Row: {
+          comment: string
+          created_at: string
+          display_name: string
+          id: string
+          rating: number
+        }
+        Insert: {
+          comment: string
+          created_at?: string
+          display_name: string
+          id?: string
+          rating: number
+        }
+        Update: {
+          comment?: string
+          created_at?: string
+          display_name?: string
+          id?: string
+          rating?: number
+        }
+        Relationships: []
+      }
       service_requests: {
         Row: {
           created_at: string
