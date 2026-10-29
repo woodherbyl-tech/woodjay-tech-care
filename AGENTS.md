@@ -11,3 +11,4 @@
 
 - Quote delivery uses a validated same-origin handler and a server-only Web3Forms helper; keep provider credentials private and report success only after provider acceptance.
 - Keep service descriptions in a browser-safe data module and render interactive service details through the shared Dialog and Button controls so content and accessibility stay consistent.
+- Reviews use shared client/server validation and public server functions with a publishable-key client under RLS; loader-backed query caching keeps saved reviews visible without privileged access.
