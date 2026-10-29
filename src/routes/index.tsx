@@ -3,8 +3,11 @@ import { useState, type FormEvent } from "react";
 import { Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { OurServices } from "@/components/our-services";
+import { ClientReviews } from "@/components/client-reviews";
+import { reviewsQueryOptions } from "@/lib/reviews-query";
 
 export const Route = createFileRoute("/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(reviewsQueryOptions),
   head: () => ({
     meta: [
       { title: "WOOD-JAY TECH & MULTI SERVICES | IT, Web & Cybersecurity" },
@@ -198,6 +201,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <ClientReviews />
 
       <footer className="border-t py-8 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} WOOD-JAY TECH & MULTI SERVICES · {PHONE} · {EMAIL}
