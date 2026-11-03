@@ -46,9 +46,10 @@ function ServiceRequestForm() {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch("/api/public/service-request", {
+      const res = await fetch("https://formspree.io/f/mjyyjgaq", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Accept": "application/json",
+                  "Content-Type": "application/json"},
         body: JSON.stringify({
           name: data.get("name"),
           email: data.get("email"),
