@@ -4,11 +4,30 @@ import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Loader2, MessageSquare, Send, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { reviewSchema } from "@/lib/reviews-schema";
-import { reviewsQueryOptions } from "@/lib/reviews-query";
+import { googleReviewsQueryOptions, reviewsQueryOptions } from "@/lib/reviews-query";
+
+function GoogleReviewButton({ url, className = "" }: { url: string | null; className?: string }) {
+  if (!url) {
+    return (
+      <div className={className}>
+        <Button type="button" variant="outline" size="lg" disabled className="h-12 font-bold">
+          <Star /> Leave a Google review
+        </Button>
+        <p className="mt-2 text-xs text-muted-foreground">Google reviews open once our Google listing is verified.</p>
+      </div>
+    );
+  }
+  return (
+    <Button asChild variant="outline" size="lg" className={`h-12 border-c1/60 font-bold ${className}`}>
+      <a href={url} target="_blank" rel="noopener noreferrer"><Star className="fill-current text-c7" /> Leave a Google review</a>
+    </Button>
+  );
+}
 import { submitReview } from "@/lib/reviews.functions";
 
 export function ClientReviews() {
   const { data, refetch } = useSuspenseQuery(reviewsQueryOptions);
+  const { data: google } = useSuspenseQuery(googleReviewsQueryOptions);
   const queryClient = useQueryClient();
   const saveReview = useServerFn(submitReview);
   const [rating, setRating] = useState(0);
@@ -87,9 +106,34 @@ export function ClientReviews() {
               {sending ? <Loader2 className="animate-spin motion-reduce:animate-none" /> : <Send />}
               {sending ? "Posting…" : "Post review"}
             </Button>
+            <div className="border-t pt-5">
+              <p className="mb-3 text-sm text-muted-foreground">Happy with our service? Help others find us on Google.</p>
+              <GoogleReviewButton url={google.reviewUrl} />
+            </div>
           </form>
           <div className="min-w-0">
-            <h3 className="mb-5 text-xl font-bold">Client experiences</h3>
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-xl font-bold">Client experiences</h3>
+              {google.reviewUrl && <GoogleReviewButton url={google.reviewUrl} />}
+            </div>
+            {google.reviews.length > 0 && (
+              <div className="mb-8 space-y-4">
+                <p className="text-sm font-semibold text-muted-foreground">
+                  From Google{google.average ? ` · ${google.average.toFixed(1)} ★ (${google.total})` : ""}
+                </p>
+                {google.reviews.slice(0, 6).map((review) => (
+                  <article key={review.id} className="rounded-lg border border-c1/30 bg-card p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <h4 className="min-w-0 break-words font-bold">{review.name} <span className="ml-1 text-xs font-normal text-muted-foreground">via Google</span></h4>
+                      <div className="flex shrink-0 gap-1 text-c7" aria-label={`${review.rating} out of 5 stars`}>
+                        {[1, 2, 3, 4, 5].map((star) => <Star key={star} aria-hidden="true" className={`size-4 ${star <= review.rating ? "fill-current" : "fill-none opacity-40"}`} />)}
+                      </div>
+                    </div>
+                    {review.comment && <p className="mt-4 whitespace-pre-wrap break-words text-sm leading-relaxed text-muted-foreground">{review.comment}</p>}
+                  </article>
+                ))}
+              </div>
+            )}
             {data.error ? (
               <div role="alert" className="border-y py-8">
                 <p className="text-muted-foreground">{data.error}</p>
