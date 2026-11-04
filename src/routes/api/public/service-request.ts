@@ -25,7 +25,7 @@ export const Route = createFileRoute("/api/public/service-request")({
         const accessKey = process.env["WEB3FORMS_ACCESS_KEY"];
         if (!accessKey) {
           return Response.json(
-            { error: "Quote delivery is temporarily unavailable. Please email herbywoodl@gmail.com." },
+            { error: "Quote delivery is temporarily unavailable. Please email woodjaytech@gmail.com." },
             { status: 503 },
           );
         }
@@ -34,14 +34,14 @@ export const Route = createFileRoute("/api/public/service-request")({
           if (!result.accepted) {
             console.error("Quote email provider rejected submission", { status: result.status });
             return Response.json(
-              { error: "Your request could not be emailed. Please try again or email herbywoodl@gmail.com." },
+              { error: "Your request could not be emailed. Please try again or email woodjaytech@gmail.com." },
               { status: 502 },
             );
           }
           return Response.json({ success: true });
         } catch {
           return Response.json(
-            { error: "Email delivery could not be confirmed. Please email herbywoodl@gmail.com." },
+            { error: "Email delivery could not be confirmed. Please email woodjaytech@gmail.com." },
             { status: 502 },
           );
         }
