@@ -40,7 +40,7 @@ export const getGoogleReviews = createServerFn({ method: "GET" }).handler(async 
         id: r.reviewId,
         name: r.reviewer?.displayName ?? "Google user",
         rating: STARS[r.starRating ?? ""] ?? 0,
-        comment: (r.comment ?? "").split("(Translated by Google)")[0].trim(),
+        comment: ((r.comment ?? "").split("(Translated by Google)")[0] ?? "").trim(),
         createdAt: r.createTime ?? "",
       }));
       average = body.averageRating ?? null;
