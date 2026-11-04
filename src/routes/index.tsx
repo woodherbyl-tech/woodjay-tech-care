@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 });
 
 const PHONE = "321-247-1251";
-const EMAIL = "herbywoodl@gmail.com";
+const EMAIL = "woodjaytech@gmail.com";
 
 const SERVICE_OPTIONS = [
   "IT Support",
