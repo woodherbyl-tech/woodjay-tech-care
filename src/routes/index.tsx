@@ -4,10 +4,13 @@ import { Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-re
 import hero from "@/assets/hero.jpg";
 import { OurServices } from "@/components/our-services";
 import { ClientReviews } from "@/components/client-reviews";
-import { reviewsQueryOptions } from "@/lib/reviews-query";
+import { googleReviewsQueryOptions, reviewsQueryOptions } from "@/lib/reviews-query";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => context.queryClient.ensureQueryData(reviewsQueryOptions),
+  loader: ({ context }) => Promise.all([
+    context.queryClient.ensureQueryData(reviewsQueryOptions),
+    context.queryClient.ensureQueryData(googleReviewsQueryOptions),
+  ]),
   head: () => ({
     meta: [
       { title: "WOOD-JAY TECH & MULTI SERVICES | IT, Web & Cybersecurity" },
