@@ -2,13 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
 import hero from "@/assets/hero.jpg";
-import ownerPortrait from "@/assets/owner-network-operations.jpg.asset.json";
-import ownerWorkshop from "@/assets/owner-repair-workshop.jpg.asset.json";
+const ownerPortrait = { url: "/WhatsApp%20Image%202026-11-07%20at%201.04.47%20PM.jpeg"
+};
+const ownerWorkshop = { url: "/WhatsApp%20Image%202026-11-07%20at%201.18.22%20PM.jpeg"
+};
 import { OurServices } from "@/components/our-services";
 import { MeetTheTechnician } from "@/components/meet-the-technician";
 import { ClientReviews } from "@/components/client-reviews";
 import { googleReviewsQueryOptions, reviewsQueryOptions } from "@/lib/reviews-query";
-
 export const Route = createFileRoute("/")({
   loader: ({ context }) => Promise.all([
     context.queryClient.ensureQueryData(reviewsQueryOptions),
