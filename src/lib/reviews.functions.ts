@@ -22,7 +22,16 @@ export const submitReview = createServerFn({ method: "POST" })
     try {
       const { createReviewsClient } = await import("@/lib/reviews.server");
       const { error } = await createReviewsClient().from("client_reviews").insert(data);
-      if (error) return { success: false, error: "Your review could not be saved. Please try again." };
+      if (error) {
+console.error("Review insert failed:", {
+code: error.code,
+ message: error.message,
+ });
+return {
+success: false,
+error: "Your review could not be saved. Please try again.",
+};
+}
       return { success: true, error: null };
     } catch {
       return { success: false, error: "Reviews are temporarily unavailable. Please try again." };
