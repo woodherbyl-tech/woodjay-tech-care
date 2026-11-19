@@ -95,13 +95,13 @@ function ServiceRequestForm() {
     );
   }
 
-  const fieldClass = "w-full rounded-xl border bg-background/60 px-4 py-2.5 text-sm outline-none transition focus:border-c1 focus:ring-2 focus:ring-c1/30";
+  const fieldClass = "w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none transition focus:border-c1 focus:ring-2 focus:ring-c1/30 placeholder:text-muted-foreground";
 
   return (
     <form onSubmit={handleSubmit} className="mt-10 rounded-2xl border bg-card/60 p-6 md:p-8">
       <h3 className="text-2xl font-bold">Request a <span className="text-gradient">free quote</span></h3>
       <p className="mt-1 text-sm text-muted-foreground">Tell us what you need help with and we'll get back to you.</p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1.5 block text-sm font-semibold">Name</span>
           <input name="name" required maxLength={100} placeholder="Your name" className={fieldClass} />
@@ -157,7 +157,7 @@ function Index() {
 
       <section id="top" className="relative">
         <img src={hero} alt="Colorful servers, laptop and security shield" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover opacity-50" />
-        <img src={ownerPortrait.url} alt="WOOD-JAY owner Woo Herby Levasseur holding a network cable tester in a network operations center" width={1086} height={1448} className="fade-left absolute inset-y-0 right-0 hidden h-full w-[36%] object-cover object-top md:block lg:w-[42%]" />
+        <img src={ownerPortrait.url} alt="WOOD-JAY owner Woo Herby Levasseur holding a network cable tester in a network operations center" width={1086} height={1448} className="fade-left absolute inset-y-0 right-0 h-full w-[46%] object-cover object-top md:w-[36%] lg:w-[42%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
         <div className="relative mx-auto max-w-6xl px-5 py-28 md:py-40">
           <span className="inline-flex items-center gap-2 rounded-full border border-c3/50 bg-c3/10 px-3 py-1 text-sm font-semibold text-c3">
@@ -193,21 +193,21 @@ function Index() {
       <MeetTheTechnician />
 
       <section id="contact" className="relative scroll-mt-20 overflow-hidden">
-        <img src={ownerWorkshop.url} alt="" aria-hidden="true" width={1024} height={1024} className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <img src={ownerWorkshop.url} alt="" aria-hidden="true" width={1024} height={1024} className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
         <div className="relative mx-auto max-w-6xl px-5 py-24">
         <div className="rounded-3xl bg-gradient-brand p-[2px]">
-          <div className="rounded-3xl bg-background/85 p-8 backdrop-blur-sm md:p-14">
+          <div className="rounded-3xl bg-background/70 p-8 md:p-14">
             <h2 className="text-4xl font-extrabold md:text-5xl">Let's <span className="text-gradient">talk tech</span></h2>
             <p className="mt-3 text-muted-foreground">Call, text or email for a free consultation.</p>
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              <a href={`tel:${PHONE}`} className="flex items-center gap-4 rounded-2xl border border-c1/40 bg-c1/10 p-6 transition hover:scale-[1.02]">
+            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+              <a href={`tel:${PHONE}`} className="flex min-w-0 flex-col gap-3 rounded-2xl border border-c1/40 bg-c1/10 p-6 transition hover:scale-[1.02] sm:flex-row sm:items-center sm:gap-4">
                 <Phone className="h-8 w-8 text-c1" />
                 <div><div className="text-sm text-muted-foreground">Call or text</div><div className="text-2xl font-bold">{PHONE}</div></div>
               </a>
-              <a href={`mailto:${EMAIL}`} className="flex items-center gap-4 rounded-2xl border border-c2/40 bg-c2/10 p-6 transition hover:scale-[1.02]">
+              <a href={`mailto:${EMAIL}`} className="flex min-w-0 flex-col items-start gap-3 rounded-2xl border border-c2/40 bg-c2/10 p-6 transition hover:scale-[1.02] sm:flex-row sm:items-center sm:gap-4">
                 <Mail className="h-8 w-8 text-c2" />
-                <div className="min-w-0"><div className="text-sm text-muted-foreground">Email</div><div className="truncate text-2xl font-bold">{EMAIL}</div></div>
+                <div className="min-w-0"><div className="text-sm text-muted-foreground">Email</div><div className="text-lg font-bold [overflow-wrap:anywhere] sm:text-2xl sm:[overflow-wrap:normal]">{EMAIL}</div></div>
               </a>
             </div>
             <ServiceRequestForm />
