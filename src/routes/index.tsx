@@ -2,7 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Phone, Mail, ArrowRight, Sparkles, CheckCircle2, Send } from "lucide-react";
 import hero from "@/assets/hero.jpg";
+import ownerPortrait from "@/assets/owner-network-operations.jpg.asset.json";
+import ownerWorkshop from "@/assets/owner-repair-workshop.jpg.asset.json";
 import { OurServices } from "@/components/our-services";
+import { MeetTheTechnician } from "@/components/meet-the-technician";
 import { ClientReviews } from "@/components/client-reviews";
 import { googleReviewsQueryOptions, reviewsQueryOptions } from "@/lib/reviews-query";
 
@@ -154,6 +157,7 @@ function Index() {
 
       <section id="top" className="relative">
         <img src={hero} alt="Colorful servers, laptop and security shield" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover opacity-50" />
+        <img src={ownerPortrait.url} alt="WOOD-JAY owner Woo Herby Levasseur holding a network cable tester in a network operations center" width={1086} height={1448} className="fade-left absolute inset-y-0 right-0 hidden h-full w-[36%] object-cover object-top md:block lg:w-[42%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
         <div className="relative mx-auto max-w-6xl px-5 py-28 md:py-40">
           <span className="inline-flex items-center gap-2 rounded-full border border-c3/50 bg-c3/10 px-3 py-1 text-sm font-semibold text-c3">
@@ -186,9 +190,14 @@ function Index() {
         </div>
       </section>
 
-      <section id="contact" className="mx-auto max-w-6xl px-5 py-24">
+      <MeetTheTechnician />
+
+      <section id="contact" className="relative scroll-mt-20 overflow-hidden">
+        <img src={ownerWorkshop.url} alt="" aria-hidden="true" width={1024} height={1024} className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="relative mx-auto max-w-6xl px-5 py-24">
         <div className="rounded-3xl bg-gradient-brand p-[2px]">
-          <div className="rounded-3xl bg-background p-8 md:p-14">
+          <div className="rounded-3xl bg-background/85 p-8 backdrop-blur-sm md:p-14">
             <h2 className="text-4xl font-extrabold md:text-5xl">Let's <span className="text-gradient">talk tech</span></h2>
             <p className="mt-3 text-muted-foreground">Call, text or email for a free consultation.</p>
             <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -203,6 +212,7 @@ function Index() {
             </div>
             <ServiceRequestForm />
           </div>
+        </div>
         </div>
       </section>
 

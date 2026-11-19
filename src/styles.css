@@ -72,6 +72,10 @@
 @utility bg-gradient-brand {
   background: var(--gradient-brand);
 }
+@utility fade-left {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%);
+  mask-image: linear-gradient(to right, transparent, #000 30%);
+}
 
 @layer base {
   * { border-color: var(--color-border); }
