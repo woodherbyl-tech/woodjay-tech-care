@@ -1,9 +1,9 @@
 import { ArrowRight, BadgeCheck, Network, ShieldCheck, Wrench } from "lucide-react";
-import ownerPortrait from "@/assets/owner-network-operations.jpg.asset.json";
-import ownerWorkshop from "@/assets/owner-repair-workshop.jpg.asset.json";
-
+const ownerPortrait = { url: "/WhatsApp%20Image%202026-11-07%20at%201.04.47%20PM.jpeg"
+};
+const ownerWorkshop = { url: "/WhatsApp%20Image%202026-11-07%20at%201.18.22%20PM.jpeg"
+};
 const PHONE = "321-247-1251";
-
 export function MeetTheTechnician() {
   return (
     <section id="about" className="relative scroll-mt-20 overflow-hidden border-y bg-muted/20">
