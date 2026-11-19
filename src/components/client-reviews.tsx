@@ -13,7 +13,7 @@ function GoogleReviewButton({ url, className = "" }: { url: string | null; class
         <Button type="button" variant="outline" size="lg" disabled className="h-12 font-bold">
           <Star /> Leave a Google review
         </Button>
-        <p className="mt-2 text-xs text-muted-foreground">Google reviews open once our Google listing is verified.</p>
+        <p className="mt-2 text-xs text-muted-foreground">Leave the Google review directly on our google page.</p>
       </div>
     );
   }
