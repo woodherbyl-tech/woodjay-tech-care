@@ -157,7 +157,7 @@ function Index() {
 
       <section id="top" className="relative">
         <img src={hero} alt="Colorful servers, laptop and security shield" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover opacity-50" />
-        <img src={ownerPortrait.url} alt="WOOD-JAY owner Woo Herby Levasseur holding a network cable tester in a network operations center" width={1086} height={1448} className="fade-left absolute inset-y-0 right-0 h-full w-[46%] object-cover object-top md:w-[36%] lg:w-[42%]" />
+        <img src={ownerPortrait.url} alt="WOOD-JAY owner Wood Herby Levasseur holding a network cable tester in a network operations center" width={1086} height={1448} className="fade-left absolute inset-y-0 right-0 h-full w-[46%] object-cover object-top md:w-[36%] lg:w-[42%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
         <div className="relative mx-auto max-w-6xl px-5 py-28 md:py-40">
           <span className="inline-flex items-center gap-2 rounded-full border border-c3/50 bg-c3/10 px-3 py-1 text-sm font-semibold text-c3">

@@ -21,10 +21,10 @@ export function MeetTheTechnician() {
             <BadgeCheck className="h-4 w-4" aria-hidden="true" /> Meet your technician
           </span>
           <h2 className="mt-6 text-4xl font-extrabold leading-tight md:text-5xl">
-            You work directly with <span className="text-gradient">Woo Herby</span>, the owner
+            You work directly with <span className="text-gradient">Wood Herby</span>, the owner
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            I'm Woo Herby Levasseur — owner and lead technician of WOOD-JAY TECH &amp; MULTI
+            I'm Wood Herby Levasseur — owner and lead technician of WOOD-JAY TECH &amp; MULTI
             SERVICES. When you call, you talk to me, and I'm the one who does the work.
           </p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -56,7 +56,7 @@ export function MeetTheTechnician() {
             <div className="col-span-3 rounded-2xl border border-c1/40 bg-card p-2 shadow-xl">
               <img
                 src={ownerPortrait.url}
-                alt="WOOD-JAY owner Woo Herby Levasseur holding a network cable tester in front of a server rack"
+                alt="WOOD-JAY owner Wood Herby Levasseur holding a network cable tester in front of a server rack"
                 width={1086}
                 height={1448}
                 className="h-[380px] w-full rounded-xl object-cover object-top sm:h-[520px]"
@@ -66,7 +66,7 @@ export function MeetTheTechnician() {
               <div className="rounded-2xl border border-c3/40 bg-card p-2 shadow-xl">
                 <img
                   src={ownerWorkshop.url}
-                  alt="Woo Herby Levasseur at a computer repair bench with open laptops, tools and test equipment"
+                  alt="Wood Herby Levasseur at a computer repair bench with open laptops, tools and test equipment"
                   width={1024}
                   height={1024}
                   className="aspect-square w-full rounded-xl object-cover"
